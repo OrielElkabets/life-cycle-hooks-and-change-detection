@@ -1,0 +1,6 @@
+<div class="wrapper">
+    <h2>{{data.name}} - On Push</h2>
+    <button (click)="''">trigger change detection</button>
+    <p>change detection: {{change()}}</p>
+    <ng-template *ngIf="child" appDynamicComponent [component]="child"></ng-template>
+</div>

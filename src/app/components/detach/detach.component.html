@@ -1,0 +1,6 @@
+<div class="wrapper">
+    <h2>{{data.name}} - Detach</h2>
+    <button (click)="triggerChangeDetection()">trigger change detection</button>
+    <p>change detection: {{change()}}</p>
+    <ng-template *ngIf="child" appDynamicComponent [component]="child"></ng-template>
+</div>
