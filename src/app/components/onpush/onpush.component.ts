@@ -14,12 +14,12 @@ import { ComponentData, DynamicComponent } from 'src/app/models/dynamic-componen
 })
 export class OnPushComponent extends HooksImplementation {
   @Input({ required: true }) data!: ComponentData
-  @Input() child?: DynamicComponent
+  @Input({ required: true }) children!: DynamicComponent[]
   CDCounter = 0
 
-  override ngOnInit(){
+  override ngOnChanges() {
     this.setData(this.data)
-    super.ngOnInit()
+    super.ngOnChanges()
   }
 
   change(){

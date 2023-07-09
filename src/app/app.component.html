@@ -1,4 +1,13 @@
 <p style="display: none;">{{change()}}</p>
 <main>
-  <ng-template appDynamicComponent [component]="root"></ng-template>
+  <div class="TreeRoot" *ngIf="!isStart">
+    <div class="TreeContainer">
+      <app-tree-node *ngFor="let component of dataService.root" [component]="component"></app-tree-node>
+    </div>
+    <hr>
+    <button (click)="showComponentTree()">Start</button>
+  </div>
+  <ng-template [ngIf]="isStart">
+    <ng-template *ngFor="let component of dataService.root" appDynamicComponent [component]="component"></ng-template>
+  </ng-template>
 </main>

@@ -5,19 +5,19 @@ import { myLogger } from "./logger";
 @Directive()
 export class HooksImplementation implements OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked {
     private name: string = "???"
-    private color1: string = ""
-    private color2: string = ""
+    private color: string = ""
+    // private color2: string = ""
 
     protected setData(data: ComponentData): void {
         this.name = data.name
-        this.color1 = `color: ${data.color1};`
-        this.color2 = `color: ${data.color2};`
+        this.color = `color: ${data.color};`
+        // this.color2 = `color: ${data.color2};`
     }
 
     ngOnInit(): void {
         this.log("on init")
     }
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(): void {
         this.log("on changes")
     }
     ngDoCheck(): void {
@@ -37,6 +37,6 @@ export class HooksImplementation implements OnInit, OnChanges, DoCheck, AfterCon
     }
 
     public log(msg: string) {
-        myLogger([this.name, msg], [this.color1, this.color2])
+        myLogger([this.name, msg], [this.color, this.color])
     }
 }

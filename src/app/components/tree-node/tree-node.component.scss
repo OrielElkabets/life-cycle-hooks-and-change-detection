@@ -1,0 +1,19 @@
+.NodeContainer{
+    display: grid;
+    gap: var(--treeNodeGap);
+}
+
+.InputsContainer{
+    display: flex;
+
+    & > *{
+        padding: 5px;
+        padding-bottom: 3px;
+        border-radius: 0px;
+        border: 1px solid gray;
+    }
+}
+
+.TreeContainer{
+    margin-inline-start: 30px;
+}

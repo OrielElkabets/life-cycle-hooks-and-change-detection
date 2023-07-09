@@ -14,14 +14,14 @@ import { ComponentData, DynamicComponent } from 'src/app/models/dynamic-componen
 })
 export class DetachComponent extends HooksImplementation {
   @Input({ required: true }) data!: ComponentData
-  @Input() child?: DynamicComponent
+  @Input({ required: true }) children!: DynamicComponent[]
 
   cdr = inject(ChangeDetectorRef)
   CDCounter = 0
 
-  override ngOnInit() {
+  override ngOnChanges() {
     this.setData(this.data)
-    super.ngOnInit()
+    super.ngOnChanges()
   }
 
   override ngAfterViewChecked() {

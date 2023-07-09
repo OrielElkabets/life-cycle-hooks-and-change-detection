@@ -12,6 +12,6 @@ export class DynamicComponentDirective {
   ngOnInit() {
     const componentRef = this.vcr.createComponent(this.component.componentClass);
     componentRef.setInput("data", this.component.data)
-    componentRef.setInput("child", this.component.child)
+    componentRef.setInput("children", this.component.children)
   }
 }

@@ -2,5 +2,5 @@
     <h2>{{data.name}} - Default</h2>
     <button (click)="''">trigger change detection</button>
     <p>change detection: {{change()}}</p>
-    <ng-template *ngIf="child" appDynamicComponent [component]="child"></ng-template>
+    <ng-template *ngFor="let child of children" appDynamicComponent [component]="child"></ng-template>
 </div>

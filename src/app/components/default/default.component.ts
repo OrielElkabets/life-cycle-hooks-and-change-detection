@@ -13,12 +13,12 @@ import { DynamicComponentDirective } from 'src/app/directives/dynamic-component-
 })
 export class DefaultComponent extends HooksImplementation {
   @Input({ required: true }) data!: ComponentData
-  @Input() child?: DynamicComponent
+  @Input({ required: true }) children!: DynamicComponent[]
   CDCounter = 0
 
-  override ngOnInit() {
+  override ngOnChanges() {
     this.setData(this.data)
-    super.ngOnInit()
+    super.ngOnChanges()
   }
 
   override ngAfterContentChecked(): void {

@@ -1,0 +1,12 @@
+<div class="NodeContainer">
+    <div class="InputsContainer">
+        <input type="text" placeholder="Component name" [(ngModel)]="component.data.name">
+        <input type="color" placeholder="Component name" [(ngModel)]="component.data.color">
+        <select [(ngModel)]="component.componentClass">
+            <option *ngFor="let option of componentsOptions" [ngValue]="option[1]">{{option[0]}}</option>
+        </select>
+    </div>
+    <div class="TreeContainer" *ngIf="component.children">
+        <app-tree-node *ngFor="let child of component.children" [component]="child"></app-tree-node>
+    </div>
+</div>

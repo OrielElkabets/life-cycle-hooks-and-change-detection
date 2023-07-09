@@ -1,52 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { myLogger } from './models/logger';
 import { DynamicComponentDirective } from './directives/dynamic-component-creator.directive';
-import { DynamicComponent } from './models/dynamic-component';
-import { DetachComponent } from './components/detach/detach.component';
-import { DefaultComponent } from './components/default/default.component';
-import { OnPushComponent } from './components/onpush/onpush.component';
+import { DataService } from './services/data.service';
+import { TreeNodeComponent } from "./components/tree-node/tree-node.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [CommonModule, DynamicComponentDirective]
+  imports: [CommonModule, TreeNodeComponent, DynamicComponentDirective]
 })
 export class AppComponent implements OnInit {
   title = 'Detach';
 
   name = "App"
-  color1 = "color: rgb(252, 255, 75);"
-  color2 = "color: #c7cb00;"
+  color = "color: #fcff4b;"
+  // color2 = `color: ${Color.pSBC(-0.30, '#fcff4b')};`
   isInit = false
   isExtraCheck = true
+  isStart = false
 
-  root: DynamicComponent = {
-    componentClass: DefaultComponent,
-    data: {
-      name: "A Component",
-      color1: "rgb(45, 255, 45)",
-      color2: "#00c600",
-    },
-    child: {
-      componentClass: DefaultComponent,
-      data: {
-        name: "B Component",
-        color1: "rgb(79, 188, 255)",
-        color2: "#0090e8",
-      },
-      child: {
-        componentClass: DefaultComponent,
-        data: {
-          name: "C Component",
-          color1: "hotpink",
-          color2: "#ff0381",
-        },
-      }
-    }
-  }
+  dataService = inject(DataService)
 
   ngOnInit(): void {
     this.log("initialize app")
@@ -66,6 +42,11 @@ export class AppComponent implements OnInit {
   }
 
   log(msg: string) {
-    myLogger([this.name, msg], [this.color1, this.color2])
+    myLogger([this.name, msg], [this.color, this.color])
+  }
+
+  showComponentTree() {
+    this.isStart = !this.isStart
+    console.log(this.dataService.root);
   }
 }
