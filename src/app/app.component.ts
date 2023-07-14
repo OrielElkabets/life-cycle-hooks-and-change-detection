@@ -1,39 +1,45 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { myLogger } from './models/logger';
 import { DynamicComponentDirective } from './directives/dynamic-component-creator.directive';
 import { DataService } from './services/data.service';
 import { TreeNodeComponent } from "./components/tree-node/tree-node.component";
+import { UpdateTreeWidthPipe } from "./pipes/update-tree-width.pipe";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [CommonModule, TreeNodeComponent, DynamicComponentDirective]
+  imports: [CommonModule, TreeNodeComponent, DynamicComponentDirective, UpdateTreeWidthPipe]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Detach';
-
+  
   name = "App"
   color = "color: #fcff4b;"
-  // color2 = `color: ${Color.pSBC(-0.30, '#fcff4b')};`
+  
+  isStart = false
   isInit = false
   isExtraCheck = true
-  isStart = false
-
+  
   dataService = inject(DataService)
-
-  ngOnInit(): void {
-    this.log("initialize app")
-  }
-
+  zone = inject(NgZone)
+  
   change() {
+    if(!this.isStart) return
     if (!this.isInit) {
       this.isInit = true
       return ""
     }
-    if (this.isExtraCheck) this.log("start development extra check")
+    if (this.isExtraCheck) {
+      this.log("start development extra check")
+      this.zone.runOutsideAngular(() => {
+        setTimeout(() => {
+          console.log("----------------------------------")
+        });
+      })
+    }
     else {
       this.log("start change detection cycle")
     }
@@ -47,6 +53,6 @@ export class AppComponent implements OnInit {
 
   showComponentTree() {
     this.isStart = !this.isStart
-    console.log(this.dataService.root);
+    this.log("initialize app")
   }
 }

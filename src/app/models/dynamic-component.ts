@@ -10,7 +10,7 @@ export type DynamicComponent = {
 }
 
 export class ComponentData {
-    constructor(public name: string, public color: string) {}
+    constructor(public name: string, public color: string, public isConst = false) {}
 }
 
 // export class ComponentData {

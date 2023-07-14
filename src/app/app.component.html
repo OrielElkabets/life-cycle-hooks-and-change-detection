@@ -1,7 +1,7 @@
 <p style="display: none;">{{change()}}</p>
 <main>
   <div class="TreeRoot" *ngIf="!isStart">
-    <div class="TreeContainer">
+    <div class="TreeContainer" [style.width]="dataService.treeChange | updateTreeWidth">
       <app-tree-node *ngFor="let component of dataService.root" [component]="component"></app-tree-node>
     </div>
     <hr>

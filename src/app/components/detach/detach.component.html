@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" [style.border-color]="data.color">
     <h2>{{data.name}} - Detach</h2>
     <button (click)="triggerChangeDetection()">trigger change detection</button>
     <p>change detection: {{change()}}</p>

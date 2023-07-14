@@ -1,19 +1,65 @@
-.NodeContainer{
+.NodeContainer {
     display: grid;
     gap: var(--treeNodeGap);
 }
 
-.InputsContainer{
+
+.componentNode {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.InputsContainer {
     display: flex;
 
-    & > *{
-        padding: 5px;
+    &>* {
+        padding: 5px 10px;
         padding-bottom: 3px;
         border-radius: 0px;
         border: 1px solid gray;
+        font-size: 14px;
+
+        &:first-child {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
+
+    select{
+        border-radius: 0px;
+    }
+
+    input[type="color"] {
+        height: auto;
+        background-color: white;
+        padding: 3px 6px;
+    }
+
+
+}
+
+.btn {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+
+    &.deleteComponentBtn {
+        border-radius: 5px;
+    }
+
+    &.deleteComponentBtn:hover {
+        color: rgb(233, 14, 14);
     }
 }
 
-.TreeContainer{
+.TreeContainer {
     margin-inline-start: 30px;
 }
