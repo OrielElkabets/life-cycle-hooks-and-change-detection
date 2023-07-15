@@ -1,4 +1,4 @@
-import { Component, inject, NgZone } from '@angular/core';
+import { Component, inject, NgZone, isDevMode } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { myLogger } from './models/logger';
 import { DynamicComponentDirective } from './directives/dynamic-component-creator.directive';
@@ -15,35 +15,25 @@ import { UpdateTreeWidthPipe } from "./pipes/update-tree-width.pipe";
 })
 export class AppComponent {
   title = 'Detach';
-  
+
   name = "App"
-  color = "color: #fcff4b;"
-  
+  color = "color: #00fbff;"
+
   isStart = false
   isInit = false
   isExtraCheck = true
-  
+
   dataService = inject(DataService)
   zone = inject(NgZone)
-  
+
   change() {
-    if(!this.isStart) return
+    if (!this.isStart) return
     if (!this.isInit) {
       this.isInit = true
       return ""
     }
-    if (this.isExtraCheck) {
-      this.log("start development extra check")
-      this.zone.runOutsideAngular(() => {
-        setTimeout(() => {
-          console.log("----------------------------------")
-        });
-      })
-    }
-    else {
-      this.log("start change detection cycle")
-    }
-    this.isExtraCheck = !this.isExtraCheck
+    if(isDevMode()) this.inDev()
+    else this.inProd()
     return ""
   }
 
@@ -54,5 +44,32 @@ export class AppComponent {
   showComponentTree() {
     this.isStart = !this.isStart
     this.log("initialize app")
+    if(!isDevMode()){
+      this.drawSeperationLine()
+    }
+  }
+
+  inDev() {
+    if (this.isExtraCheck) {
+      this.log("start development extra check")
+      this.drawSeperationLine()
+    }
+    else {
+      this.log("start change detection cycle")
+    }
+    this.isExtraCheck = !this.isExtraCheck
+  }
+
+  inProd() {
+    this.log("start change detection cycle")
+    this.drawSeperationLine()
+  }
+  
+  drawSeperationLine(){    
+    this.zone.runOutsideAngular(() => {
+      setTimeout(() => {
+        console.log("----------------------------------")
+      });
+    })
   }
 }
