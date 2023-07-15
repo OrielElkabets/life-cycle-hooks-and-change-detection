@@ -48,7 +48,7 @@ export class AppComponent {
   }
 
   log(msg: string) {
-    myLogger([this.name, msg], [this.color, this.color])
+    myLogger([this.name, msg], [this.color + "font-weight: bold;", this.color])
   }
 
   showComponentTree() {

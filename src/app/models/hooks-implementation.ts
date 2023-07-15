@@ -37,6 +37,6 @@ export class HooksImplementation implements OnInit, OnChanges, DoCheck, AfterCon
     }
 
     public log(msg: string) {
-        myLogger([this.name, msg], [this.color, this.color])
+        myLogger([this.name, msg], [this.color + "font-weight: bold;", this.color])
     }
 }
